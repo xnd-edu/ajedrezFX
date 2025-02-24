@@ -75,7 +75,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.xnd.ajedrezfxcom.xnd.ajedrezfx.HelloApplication</mainClass>
+                            <mainClass>com.xnd.ajedrezfx/com.xnd.ajedrezfx.HelloApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
