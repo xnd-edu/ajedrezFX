@@ -34,13 +34,12 @@ public class Juego {
     /**
      * Método que valida y convierte la jugada introducida por el usuario a un movimiento
      *
-     * @param jugada  Coordenadas introducidas por el usuario (Ej: A2B3)
      * @param tablero Tablero donde se ejecuta la jugada
      * @param strings Sistema de strings para la localización
      * @return Movimiento de la pieza. Si el movimiento es nulo es que no es válido.
      */
-    public Movimiento jugada(Movimiento mov, Tablero tablero) {
-//        String idioma = strings.getIdioma();
+    public String jugada(Movimiento mov, Tablero tablero, Strings strings) {
+
 
 //        // La jugada debe tener 4 caracteres
 //        if (jugada.length() != 4)
@@ -58,9 +57,11 @@ public class Juego {
 //            int filaInicial = 7 - (jugada.charAt(1) - '1');
 //            int filaFinal = 7 - (jugada.charAt(3) - '1');
 
+        String idioma = strings.getIdioma();
+
         // Abortar si el movimiento es inválido
         if (mov == null || mov.posInicial == null || mov.posFinal == null) {
-            return null;
+            return strings.toString(idioma, "errMovNoValido");
         }
 
         // Crear las posiciones del movimiento
@@ -69,42 +70,31 @@ public class Juego {
 
         // Debe haber una pieza en la posición inicial, si no que estás moviendo?
         if (tablero.devuelvePieza(posInicial).getColor() != getTurno()) {
-//                System.out.println(strings.toString(idioma, "errColorIncorrecto"));
-            return null;
+            return strings.toString(idioma, "errColorIncorrecto");
         } else if (tablero.hayPieza(posFinal)) {
             if (tablero.devuelvePieza(posFinal).getColor() == getTurno()) {
-//                    System.out.println(strings.toString(idioma, "errCanibal"));
-                return null;
-            } else
-                mov = new Movimiento(posInicial, posFinal);
-        } else {
-            // Si todo va bien crea una instancia del movimiento
-            mov = new Movimiento(posInicial, posFinal);
+                return strings.toString(idioma, "errCanibal");
+            }
         }
 
         // Verificar si el movimiento es válido para esa pieza
         // Si no es válido se vuelve nulo
-        if (mov != null) {
-            if ((tablero.hayPiezasEntre(mov))) {
-                if (!(tablero.devuelvePieza(mov.posInicial).getNombre().equals("\u265E") || tablero.devuelvePieza(mov.posInicial).getNombre().equals("\u2658")) ){
-//                    System.out.println(strings.toString(idioma, "errPiezasEnMedio"));
-                    return null;
-                }
+        if ((tablero.hayPiezasEntre(mov))) {
+            if (!(tablero.devuelvePieza(mov.posInicial).getNombre().equals("\u265E") || tablero.devuelvePieza(mov.posInicial).getNombre().equals("\u2658"))) {
+                return strings.toString(idioma, "errPiezasEnMedio");
             }
-            if (!tablero.devuelvePieza(posInicial).validoMovimiento(mov, tablero)) {
-//                System.out.println(strings.toString(idioma, "errMovNoValido"));
-                return null;
-            }
+        }
+        if (!tablero.devuelvePieza(posInicial).validoMovimiento(mov, tablero)) {
+            return strings.toString(idioma, "errMovNoValido");
         }
 
         // Promoción del peón
-        if (mov != null) {
-            if ((tablero.devuelvePieza(posInicial).getNombre().equals("PeonNegro") && posFinal.getFila() == 7) || (tablero.devuelvePieza(posInicial).getNombre().equals("PeonBlanco") && posFinal.getFila() == 0)) {
-                tablero.promocionPeon(mov);
-            }
+        if ((tablero.devuelvePieza(posInicial).getNombre().equals("PeonNegro") && posFinal.getFila() == 7) || (tablero.devuelvePieza(posInicial).getNombre().equals("PeonBlanco") && posFinal.getFila() == 0)) {
+            tablero.promocionPeon(mov);
         }
 
-        return mov;
+        // Si el movimiento es correcto, no hay error
+        return null;
     }
 
 }

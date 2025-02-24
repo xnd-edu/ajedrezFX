@@ -18,7 +18,10 @@ public class Strings {
      * @return Código del idioma (Ej: "en")
      */
     public String getIdioma() {
-        return this.idioma;
+        if (this.idioma == null)
+            return "en";
+        else
+            return this.idioma;
     }
 
     /**
@@ -39,17 +42,17 @@ public class Strings {
         switch (this.idioma) {
             default:
                 // Si no se especifica idioma usar el inglés
-            case "en":
+            case "English":
                 switch (string) {
                     // Clase main
                     case "empezarJuego":
                         return "Starting game...";
                     case "errOpcionNoValida":
-                        return "Error: Please choose a valid option.";
+                        return "Please choose a valid option.";
                     case "turnoBlancas":
-                        return "---------------------------------------\n|             WHITES turn             |\n---------------------------------------";
+                        return "Whites turn";
                     case "turnoNegras":
-                        return "---------------------------------------\n|             BLACKS turn             |\n---------------------------------------";
+                        return "Blacks turn";
                     case "introduceJugada":
                         return "Introduce move (Example: A2B3):";
                     // Clase Juego
@@ -58,30 +61,30 @@ public class Strings {
                     case "errFormato":
                         return "Error: Incorrect format.";
                     case "errNoPieza":
-                        return "Error: There is no piece in that position.";
+                        return "There is no piece in that position.";
                     case "errColorIncorrecto":
-                        return "Error: That piece does not belong to you.";
+                        return "That piece does not belong to you.";
                     case "errCanibal":
-                        return "Error: You cannot eat your own pieces.";
+                        return "You cannot eat your own pieces.";
                     case "errMovNoValido":
-                        return "Error: The move is not valid.";
+                        return "The move is not valid.";
                     case "errPiezasEnMedio":
-                        return "Error: There are pieces in between.";
+                        return "There are pieces in between.";
                     case "promocionPeon":
                         return "Which piece do you want to promote to? \n1. Queen \n2. Rook \n3. Bishop \n4. Knight";
                 }
 
-            case "es":
+            case "Español":
                 switch (string) {
                     // Clase main
                     case "empezarJuego":
                         return "Empezando el juego...";
                     case "errOpcionNoValida":
-                        return "Error: Por favor elija una opción valida.";
+                        return "Por favor elija una opción valida.";
                     case "turnoBlancas":
-                        return "-----------------------------------------\n|             Turno BLANCAS             |\n-----------------------------------------";
+                        return "Turno de blancas";
                     case "turnoNegras":
-                        return "-----------------------------------------\n|             Turno NEGRAS              |\n-----------------------------------------";
+                        return "Turno de negras";
                     case "introduceJugada":
                         return "Introduce jugada (Ejemplo: A2B3):";
                     // Clase Juego
@@ -90,15 +93,15 @@ public class Strings {
                     case "errFormato":
                         return "Error: Formato incorrecto.";
                     case "errNoPieza":
-                        return "Error: No hay ninguna pieza en esa posición.";
+                        return "No hay ninguna pieza en esa posición.";
                     case "errColorIncorrecto":
-                        return "Error: Esa pieza no te pertenece.";
+                        return "Esa pieza no te pertenece.";
                     case "errCanibal":
-                        return "Error: No puedes comerte tus propias piezas.";
+                        return "No puedes comerte tus propias piezas.";
                     case "errMovNoValido":
-                        return "Error: El movimiento no es válido.";
+                        return "El movimiento no es válido.";
                     case "errPiezasEnMedio":
-                        return "Error: Hay piezas en medio.";
+                        return "Hay piezas en medio.";
                     case "promocionPeon":
                         return "¿A qué pieza quieres promocionar? \n1. Reina \n2. Torre \n3. Alfil \n4. Caballo";
                 }
