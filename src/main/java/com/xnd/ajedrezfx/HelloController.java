@@ -49,47 +49,33 @@ public class HelloController implements Initializable {
 
     protected void elegirIdioma() {
         ChoiceDialog<String> choiceDialog = new ChoiceDialog<>("English", "English", "Español");
-        choiceDialog.setTitle("Chess GOTY Edition");
-        choiceDialog.setHeaderText("Choose your language:");
+        choiceDialog.setTitle("Language selection - Simple Chess");
+        choiceDialog.setHeaderText("Choose your language");
         choiceDialog.setContentText("Select a language:");
 
         choiceDialog.showAndWait().ifPresent(idiomaSeleccionado -> strings.setIdioma(idiomaSeleccionado));
     }
 
-    public void accion(String coordenadas) {
-        String args[] = coordenadas.split(";");
-        int fila = Integer.parseInt(args[0]);
-        int columna = Integer.parseInt(args[1]);
-        System.out.println(fila + "-" + columna);
-    }
-
-    public void accion(int x, int y) {
-        System.out.println(x + "-" + y);
-    }
-
     private void pintarTablero() {
-        mainGrid.getChildren().clear();
+        // Estos solo es ejecutan al empezar el juego
         labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
+        label.setText(strings.toString(idioma, "eligeCasilla"));
+
+
+        mainGrid.getChildren().clear();
 
         for (int i = 0; i <= 7; i++) {
             for (int j = 0; j <= 7; j++) {
                 Pane pane = new Pane();
                 if (j % 2 == 0 && i % 2 == 0 || j % 2 != 0 && i % 2 != 0) {
-                    pane.setStyle("-fx-background-color: #684714;");
+                    pane.setStyle("-fx-background-color: #146861;");
                 } else {
-                    pane.setStyle("-fx-background-color: #ffe68e");
+                    pane.setStyle("-fx-background-color: #8defdd");
                 }
 
                 if (tablero.hayPieza(i, j)) {
                     pane.getChildren().add(new ImageView(new Image("File:src/main/resources/com/xnd/ajedrezfx/imagenes/" + tablero.devuelvePieza(i, j).getNombre() + ".png")));
                 }
-
-//                if (i == j) {
-//                    //addAll vs add
-//                    pane.getChildren().add(new ImageView(new Image("File:Ej3GridImageView/src/main/resources/com/example/ej3gridimageview/imagenes/CaballoBlanco.png")));
-//
-//                    //pane.getChildren().add(new ImageView(new Image("File:src/main/resources/com/example/ej3gridimageview/imagenes/CaballoBlanco.png")));
-//                }
 
                 int fila = i;
                 int columna = j;
@@ -107,9 +93,9 @@ public class HelloController implements Initializable {
                 posInicial = new Posicion(fila, columna);
                 char columnaTexto = (char) (columna + 65);
                 int filaTexto = Math.abs(fila - 8);
-                label.setText("Pieza seleccionada en: " + columnaTexto + "," + filaTexto);
+                label.setText(strings.toString(idioma, "piezaSelec") + "(" + columnaTexto + filaTexto + ")");
             } else {
-                label.setText("Casilla vacía");
+                label.setText(strings.toString(idioma, "casillaVacia"));
             }
         } else {
             // Segunda selección: intentamos mover la pieza
@@ -125,6 +111,18 @@ public class HelloController implements Initializable {
                 tablero.quitaPieza(posInicial);
                 pintarTablero(); // Redibujar el tablero para reflejar los cambios
                 juego.setTurno(!juego.getTurno()); // Cambiar turno
+                labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
+            } else if (resultado.equals("promocionPeon")) {
+                ChoiceDialog<String> choiceDialog = new ChoiceDialog<>(strings.toString(idioma, "reina"), strings.toString(idioma, "reina"), strings.toString(idioma, "torre"), strings.toString(idioma, "alfil"), strings.toString(idioma, "caballo"));
+                choiceDialog.setTitle("Pawn promotion - Simple Chess");
+                choiceDialog.setHeaderText(strings.toString(idioma, "promocionPeon"));
+                choiceDialog.setContentText(strings.toString(idioma, "eligePieza"));
+
+                choiceDialog.showAndWait().ifPresent(piezaSeleccionada -> tablero.promocionPeon(mov, piezaSeleccionada, strings));
+
+                pintarTablero(); // Redibujar el tablero para reflejar los cambios
+                juego.setTurno(!juego.getTurno()); // Cambiar turno
+                labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
             } else {
                 label.setText(resultado);
             }
@@ -133,9 +131,5 @@ public class HelloController implements Initializable {
             posInicial = null;
             posFinal = null;
         }
-    }
-
-
-    public void enroque(ActionEvent actionEvent) {
     }
 }

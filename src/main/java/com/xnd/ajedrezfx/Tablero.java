@@ -10,6 +10,7 @@ public class Tablero {
     Pieza[][] tablero = new Pieza[8][8];
 
     // ******* CONSTRUCTORES *******
+
     /**
      * Constructor del tablero. Coloca las piezas en sus respectivas posiciones iniciales.
      */
@@ -47,6 +48,7 @@ public class Tablero {
     }
 
     // ******* MÉTODOS *******
+
     /**
      * Método que imprime el tablero con las piezas en sus posiciones actuales
      */
@@ -68,8 +70,8 @@ public class Tablero {
                     k--;
                 }
 
-                if (hayPieza(i,j)) {
-                    System.out.print("\u2006\u2006" + devuelvePieza(i,j).getNombre()); // \u2006 es un espacio para centrar las piezas mas
+                if (hayPieza(i, j)) {
+                    System.out.print("\u2006\u2006" + devuelvePieza(i, j).getNombre()); // \u2006 es un espacio para centrar las piezas mas
                 } else {
                     if ((i + j) % 2 == 0) {
                         System.out.print(" \u25A1"); // Cuadrado blanco
@@ -84,6 +86,7 @@ public class Tablero {
 
     /**
      * Comprueba si existe una pieza en una casilla (not null)
+     *
      * @param fila
      * @param columna
      * @return true si hay pieza
@@ -94,6 +97,7 @@ public class Tablero {
 
     /**
      * Comprueba si existe una pieza en una casilla (not null)
+     *
      * @param pos
      * @return true si hay pieza
      */
@@ -103,6 +107,7 @@ public class Tablero {
 
     /**
      * Método que comprueba si existen piezas dentro del movimiento especificado
+     *
      * @param mov Movimiento
      * @return true si hay piezas entre la posición inicial y final
      */
@@ -156,97 +161,73 @@ public class Tablero {
 
     /**
      * Método que pone una pieza en la casilla especificada
+     *
      * @param figura
      * @param fila
      * @param columna
      */
-    public void ponPieza (Pieza figura, int fila, int columna) {
+    public void ponPieza(Pieza figura, int fila, int columna) {
         tablero[fila][columna] = figura;
     }
 
     /**
      * Método que pone una pieza en la casilla especificada
+     *
      * @param figura
      * @param pos
      */
-    public void ponPieza (Pieza figura, Posicion pos) {
+    public void ponPieza(Pieza figura, Posicion pos) {
         ponPieza(figura, pos.getFila(), pos.getColumna());
     }
 
     /**
      * Método que elimina una pieza de la casilla especificada
+     *
      * @param fila
      * @param columna
      */
-    public void quitaPieza (int fila, int columna) {
+    public void quitaPieza(int fila, int columna) {
         tablero[fila][columna] = null;
     }
 
     /**
      * Método que elimina una pieza de la casilla especificada
+     *
      * @param pos
      */
-    public void quitaPieza (Posicion pos) {
+    public void quitaPieza(Posicion pos) {
         quitaPieza(pos.getFila(), pos.getColumna());
     }
 
     /**
      * Método que devuelve la pieza situada en la casilla especificada
+     *
      * @param fila
      * @param columna
      * @return La clase Pieza
      */
-    public Pieza devuelvePieza (int fila, int columna) {
+    public Pieza devuelvePieza(int fila, int columna) {
         return tablero[fila][columna];
     }
 
-    public Pieza devuelvePieza (Posicion pos) {
+    public Pieza devuelvePieza(Posicion pos) {
         return devuelvePieza(pos.getFila(), pos.getColumna());
     }
 
-    public void promocionPeon (Movimiento mov) {
-        boolean noValido;
-        int opcion;
+    public void promocionPeon(Movimiento mov, String pieza, Strings strings) {
         boolean color = devuelvePieza(mov.posInicial).getColor();
-//        String idioma = strings.getIdioma();
-        Scanner sc = new Scanner(System.in);
-//        System.out.println(strings.toString(idioma, "promocionPeon"));
-        do {
-            noValido = false;
-            opcion = sc.nextInt();
-            switch (opcion) {
-                // Reina
-                case 1:
-                    if (color)
-                        tablero[mov.posInicial.getFila()][mov.posInicial.getColumna()] = new Reina(true, "\u2655");
-                    else
-                        tablero[mov.posInicial.getFila()][mov.posInicial.getColumna()] = new Reina(false, "\u265B");
-                    break;
-                // Torre
-                case 2:
-                    if (color)
-                        tablero[mov.posInicial.getFila()][mov.posInicial.getColumna()] = new Torre(true, "\u2656");
-                    else
-                        tablero[mov.posInicial.getFila()][mov.posInicial.getColumna()] = new Torre(false, "\u265C");
-                    break;
-                // Alfil
-                case 3:
-                    if (color)
-                        tablero[mov.posInicial.getFila()][mov.posInicial.getColumna()] = new Alfil(true, "\u2657");
-                    else
-                        tablero[mov.posInicial.getFila()][mov.posInicial.getColumna()] = new Alfil(false, "\u265D");
-                    break;
-                // Caballo
-                case 4:
-                    if (color)
-                        tablero[mov.posInicial.getFila()][mov.posInicial.getColumna()] = new Caballo(true, "\u2658");
-                    else
-                        tablero[mov.posInicial.getFila()][mov.posInicial.getColumna()] = new Caballo(false, "\u265E");
-                    break;
-                default:
-//                    System.out.println(strings.toString(idioma, "errOpcionNoValida"));
-                    noValido = true;
-            }
-        } while (noValido);
+        String idioma = strings.getIdioma();
+
+        if (pieza.equals(strings.toString(idioma, "reina"))) {
+            tablero[mov.posFinal.getFila()][mov.posFinal.getColumna()] = new Reina(color, color ? "ReinaBlanca" : "ReinaNegra");
+        } else if (pieza.equals(strings.toString(idioma, "torre"))) {
+            tablero[mov.posFinal.getFila()][mov.posFinal.getColumna()] = new Torre(color, color ? "TorreBlanca" : "TorreNegra");
+        } else if (pieza.equals(strings.toString(idioma, "alfil"))) {
+            tablero[mov.posFinal.getFila()][mov.posFinal.getColumna()] = new Alfil(color, color ? "AlfilBlanco" : "AlfilNegro");
+        } else if (pieza.equals(strings.toString(idioma, "caballo"))) {
+            tablero[mov.posFinal.getFila()][mov.posFinal.getColumna()] = new Caballo(color, color ? "CaballoBlanco" : "CaballoNegro");
+        }
+
+        quitaPieza(mov.posInicial);
     }
 }

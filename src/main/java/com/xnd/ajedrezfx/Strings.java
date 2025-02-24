@@ -71,7 +71,23 @@ public class Strings {
                     case "errPiezasEnMedio":
                         return "There are pieces in between.";
                     case "promocionPeon":
-                        return "Which piece do you want to promote to? \n1. Queen \n2. Rook \n3. Bishop \n4. Knight";
+                        return "Which piece do you want to promote to?";
+                    case "piezaSelec":
+                        return "Piece selected in: ";
+                    case "casillaVacia":
+                        return "Empty square";
+                    case "eligeCasilla":
+                        return "Click the squares to move the pieces";
+                    case "reina":
+                        return "Queen";
+                    case "torre":
+                        return "Rook";
+                    case "alfil":
+                        return "Bishop";
+                    case "caballo":
+                        return "Horse";
+                    case "eligePieza":
+                        return "Choose a piece:";
                 }
 
             case "Español":
@@ -103,7 +119,23 @@ public class Strings {
                     case "errPiezasEnMedio":
                         return "Hay piezas en medio.";
                     case "promocionPeon":
-                        return "¿A qué pieza quieres promocionar? \n1. Reina \n2. Torre \n3. Alfil \n4. Caballo";
+                        return "¿A qué pieza quieres promocionar?";
+                    case "piezaSelec":
+                        return "Pieza seleccionada en: ";
+                    case "casillaVacia":
+                        return "Casilla vacía";
+                    case "eligeCasilla":
+                        return "Haz click en las casillas para mover las piezas.";
+                    case "reina":
+                        return "Reina";
+                    case "torre":
+                        return "Torre";
+                    case "alfil":
+                        return "Alfil";
+                    case "caballo":
+                        return "Caballo";
+                    case "eligePieza":
+                        return "Elige una pieza:";
                 }
         }
         return "STRING NOT LOCALISED";

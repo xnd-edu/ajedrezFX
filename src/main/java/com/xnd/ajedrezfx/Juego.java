@@ -90,7 +90,7 @@ public class Juego {
 
         // Promoción del peón
         if ((tablero.devuelvePieza(posInicial).getNombre().equals("PeonNegro") && posFinal.getFila() == 7) || (tablero.devuelvePieza(posInicial).getNombre().equals("PeonBlanco") && posFinal.getFila() == 0)) {
-            tablero.promocionPeon(mov);
+            return "promocionPeon";
         }
 
         // Si el movimiento es correcto, no hay error

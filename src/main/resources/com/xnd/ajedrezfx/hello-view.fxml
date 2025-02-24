@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.xnd.ajedrezfx.HelloController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="510.0" style="-fx-background-color: #2b3131;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.xnd.ajedrezfx.HelloController">
     <children>
         <!--onMouseClicked="#click" en GridPane o listener en cada pane 8x8 en el controller con java-->
         <GridPane fx:id="mainGrid" alignment="CENTER" layoutY="48.0" prefHeight="550.0" prefWidth="510.0">
@@ -31,7 +31,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-      <Label fx:id="labelTurno" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="7.0" prefHeight="35.0" prefWidth="197.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="labelTurno" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="7.0" prefHeight="35.0" prefWidth="197.0" text="Label" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -39,9 +39,9 @@
             <Point3D />
          </rotationAxis>
       </Label>
-        <Label fx:id="label" layoutX="14.0" layoutY="599.0" text="Bienvenido">
+        <Label fx:id="label" layoutX="14.0" layoutY="544.0" prefHeight="32.0" prefWidth="440.0" text="Bienvenido" textFill="WHITE">
             <font>
-                <Font size="22.0" />
+                <Font size="20.0" />
             </font>
         </Label>
     </children>
