@@ -7,6 +7,7 @@ import com.xnd.ajedrezfx.Tablero;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -26,6 +27,8 @@ public class HelloController implements Initializable {
     @FXML
     private Label label;
     @FXML
+    private Label labelTurno;
+    @FXML
     private GridPane mainGrid;
 
     private Posicion posInicial = null;
@@ -35,39 +38,6 @@ public class HelloController implements Initializable {
 
     private Strings strings = new Strings();
     String idioma = strings.getIdioma();
-
-    @FXML
-    protected void onHelloButtonClick() {
-        label.setText("Welcome to JavaFX Application!");
-    }
-
-    /*public void click(MouseEvent mouseEvent) {
-        int columna = 0;
-        int fila = 0;
-        for (Node node : mainGrid.getChildren()) {
-            if (node.getBoundsInParent().contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
-                columna = GridPane.getColumnIndex(node);
-                fila = GridPane.getRowIndex(node);
-            }
-        }
-        boolean encontrado=false;
-        for (int i=0; i< mainGrid.getChildren().size()  && !encontrado;i++) {
-            Node node = mainGrid.getChildren().get(i);
-            if (node.getBoundsInParent().contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
-                columna = GridPane.getColumnIndex(node);
-                fila = GridPane.getRowIndex(node);
-                encontrado = true;
-            }
-        }
-        System.out.println(fila+" "+columna);
-        //Otra forma
-        /*Node node = (Node) mouseEvent.getTarget();
-        if (node != null && node.getBoundsInParent().contains(mouseEvent.getSceneX(), mouseEvent.getSceneY())) {
-            columna = GridPane.getColumnIndex(node);
-            fila = GridPane.getRowIndex(node);
-            System.out.println("Row : " + fila + ", Col : " + columna);
-        }
-    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -99,7 +69,7 @@ public class HelloController implements Initializable {
 
     private void pintarTablero() {
         mainGrid.getChildren().clear();
-        label.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
+        labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
 
         for (int i = 0; i <= 7; i++) {
             for (int j = 0; j <= 7; j++) {
