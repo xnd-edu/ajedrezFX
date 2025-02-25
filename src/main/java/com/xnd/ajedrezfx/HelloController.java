@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Optional;
@@ -56,6 +57,20 @@ public class HelloController implements Initializable {
         choiceDialog.showAndWait().ifPresent(idiomaSeleccionado -> strings.setIdioma(idiomaSeleccionado));
     }
 
+    @FXML
+    public void confirmarCierre(Stage stage) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(strings.toString(idioma, "cerrarJuego"));
+        alert.setHeaderText(strings.toString(idioma, "confirmacionCierre"));
+        alert.setContentText(strings.toString(idioma, "advertenciaCierre"));
+
+
+        Optional<ButtonType> resultado = alert.showAndWait();
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            stage.close();
+        }
+    }
+
     private void pintarTablero() {
         // Estos solo es ejecutan al empezar el juego
         labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
@@ -79,7 +94,15 @@ public class HelloController implements Initializable {
 
                 int fila = i;
                 int columna = j;
-                pane.setOnMouseClicked(e -> manejadorMovimiento(fila, columna));
+                pane.setOnMouseClicked(e -> {
+                    if (pane.getStyle().equals("-fx-background-color: #146861;")) {
+                        pane.setStyle("-fx-background-color: #0f504a;");
+                    } else if (pane.getStyle().equals("-fx-background-color: #8defdd")) {
+                        pane.setStyle("-fx-background-color: #76c8b9");
+                    }
+                    manejadorMovimiento(fila, columna);
+
+                });
 
                 mainGrid.add(pane, j, i);
             }
@@ -95,6 +118,7 @@ public class HelloController implements Initializable {
                 int filaTexto = Math.abs(fila - 8);
                 label.setText(strings.toString(idioma, "piezaSelec") + "(" + columnaTexto + filaTexto + ")");
             } else {
+                pintarTablero();
                 label.setText(strings.toString(idioma, "casillaVacia"));
             }
         } else {
@@ -113,17 +137,32 @@ public class HelloController implements Initializable {
                 juego.setTurno(!juego.getTurno()); // Cambiar turno
                 labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
             } else if (resultado.equals("promocionPeon")) {
-                ChoiceDialog<String> choiceDialog = new ChoiceDialog<>(strings.toString(idioma, "reina"), strings.toString(idioma, "reina"), strings.toString(idioma, "torre"), strings.toString(idioma, "alfil"), strings.toString(idioma, "caballo"));
-                choiceDialog.setTitle("Pawn promotion - Simple Chess");
-                choiceDialog.setHeaderText(strings.toString(idioma, "promocionPeon"));
-                choiceDialog.setContentText(strings.toString(idioma, "eligePieza"));
+                String piezaSeleccionada = null;
+                do {
+                    ChoiceDialog<String> choiceDialog = new ChoiceDialog<>(
+                            strings.toString(idioma, "reina"),
+                            strings.toString(idioma, "reina"),
+                            strings.toString(idioma, "torre"),
+                            strings.toString(idioma, "alfil"),
+                            strings.toString(idioma, "caballo")
+                    );
+                    choiceDialog.setTitle("Pawn promotion - Simple Chess");
+                    choiceDialog.setHeaderText(strings.toString(idioma, "promocionPeon"));
+                    choiceDialog.setContentText(strings.toString(idioma, "eligePieza"));
 
-                choiceDialog.showAndWait().ifPresent(piezaSeleccionada -> tablero.promocionPeon(mov, piezaSeleccionada, strings));
+                    Optional<String> opcion = choiceDialog.showAndWait();
+                    if (opcion.isPresent()) {
+                        piezaSeleccionada = opcion.get();
+                    }
+                } while (piezaSeleccionada == null);
 
-                pintarTablero(); // Redibujar el tablero para reflejar los cambios
-                juego.setTurno(!juego.getTurno()); // Cambiar turno
+                tablero.promocionPeon(mov, piezaSeleccionada, strings);
+
+                pintarTablero();
+                juego.setTurno(!juego.getTurno());
                 labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
             } else {
+                pintarTablero();
                 label.setText(resultado);
             }
 

@@ -70,6 +70,7 @@ public class Strings {
                         return "The move is not valid.";
                     case "errPiezasEnMedio":
                         return "There are pieces in between.";
+                    // Clase HelloController
                     case "promocionPeon":
                         return "Which piece do you want to promote to?";
                     case "piezaSelec":
@@ -88,6 +89,12 @@ public class Strings {
                         return "Horse";
                     case "eligePieza":
                         return "Choose a piece:";
+                    case "cierreJuego":
+                        return "Exit Game";
+                    case "confirmacionCierre":
+                        return "Are you sure you want to quit?";
+                    case "advertenciaCierre":
+                        return "Any progress will be lost.";
                 }
 
             case "Español":
@@ -118,6 +125,7 @@ public class Strings {
                         return "El movimiento no es válido.";
                     case "errPiezasEnMedio":
                         return "Hay piezas en medio.";
+                    // Clase HelloController
                     case "promocionPeon":
                         return "¿A qué pieza quieres promocionar?";
                     case "piezaSelec":
@@ -136,6 +144,12 @@ public class Strings {
                         return "Caballo";
                     case "eligePieza":
                         return "Elige una pieza:";
+                    case "cierreJuego":
+                        return "Cerrar el Juego";
+                    case "confirmacionCierre":
+                        return "¿Estás seguro de que quieres salir?";
+                    case "advertenciaCierre":
+                        return "Se perderá todo el progreso.";
                 }
         }
         return "STRING NOT LOCALISED";
