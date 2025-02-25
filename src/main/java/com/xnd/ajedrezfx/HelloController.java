@@ -76,14 +76,13 @@ public class HelloController implements Initializable {
         labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
         label.setText(strings.toString(idioma, "eligeCasilla"));
 
-
         mainGrid.getChildren().clear();
 
         for (int i = 0; i <= 7; i++) {
             for (int j = 0; j <= 7; j++) {
                 Pane pane = new Pane();
                 if (j % 2 == 0 && i % 2 == 0 || j % 2 != 0 && i % 2 != 0) {
-                    pane.setStyle("-fx-background-color: #146861;");
+                    pane.setStyle("-fx-background-color: #146861");
                 } else {
                     pane.setStyle("-fx-background-color: #8defdd");
                 }
@@ -95,13 +94,12 @@ public class HelloController implements Initializable {
                 int fila = i;
                 int columna = j;
                 pane.setOnMouseClicked(e -> {
-                    if (pane.getStyle().equals("-fx-background-color: #146861;")) {
-                        pane.setStyle("-fx-background-color: #0f504a;");
+                    if (pane.getStyle().equals("-fx-background-color: #146861")) {
+                        pane.setStyle("-fx-background-color: #0f504a");
                     } else if (pane.getStyle().equals("-fx-background-color: #8defdd")) {
                         pane.setStyle("-fx-background-color: #76c8b9");
                     }
                     manejadorMovimiento(fila, columna);
-
                 });
 
                 mainGrid.add(pane, j, i);
@@ -146,7 +144,7 @@ public class HelloController implements Initializable {
                             strings.toString(idioma, "alfil"),
                             strings.toString(idioma, "caballo")
                     );
-                    choiceDialog.setTitle("Pawn promotion - Simple Chess");
+                    choiceDialog.setTitle(strings.toString(idioma, "promocionTitulo"));
                     choiceDialog.setHeaderText(strings.toString(idioma, "promocionPeon"));
                     choiceDialog.setContentText(strings.toString(idioma, "eligePieza"));
 
@@ -162,6 +160,7 @@ public class HelloController implements Initializable {
                 juego.setTurno(!juego.getTurno());
                 labelTurno.setText(juego.getTurno() ? strings.toString(idioma, "turnoBlancas") : strings.toString(idioma, "turnoNegras"));
             } else {
+                // Movimiento inválido, muestra el error
                 pintarTablero();
                 label.setText(resultado);
             }

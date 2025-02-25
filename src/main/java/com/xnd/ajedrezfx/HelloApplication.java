@@ -16,21 +16,21 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Chess GOTY Edition");
+        stage.setTitle("Simple Chess");
         stage.setScene(scene);
         stage.show();
 
-        HelloController controller = fxmlLoader.getController();
+        // Nada de redimensiones
+        stage.setResizable(false);
+        stage.setMaximized(false);
 
+        HelloController controller = fxmlLoader.getController();
         // Evitar el cierre del juego
         stage.setOnCloseRequest(event -> {
             event.consume();
             controller.confirmarCierre(stage);
         });
     }
-
-
-
 
     public static void main(String[] args) {
         launch();

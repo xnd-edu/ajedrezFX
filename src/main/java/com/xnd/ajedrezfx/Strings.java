@@ -71,6 +71,8 @@ public class Strings {
                     case "errPiezasEnMedio":
                         return "There are pieces in between.";
                     // Clase HelloController
+                    case "promocionTitulo":
+                        return "Pawn promotion - Simple Chess";
                     case "promocionPeon":
                         return "Which piece do you want to promote to?";
                     case "piezaSelec":
@@ -89,7 +91,7 @@ public class Strings {
                         return "Horse";
                     case "eligePieza":
                         return "Choose a piece:";
-                    case "cierreJuego":
+                    case "cerrarJuego":
                         return "Exit Game";
                     case "confirmacionCierre":
                         return "Are you sure you want to quit?";
@@ -126,6 +128,8 @@ public class Strings {
                     case "errPiezasEnMedio":
                         return "Hay piezas en medio.";
                     // Clase HelloController
+                    case "promocionTitulo":
+                        return "Promoción del peón - Simple Chess";
                     case "promocionPeon":
                         return "¿A qué pieza quieres promocionar?";
                     case "piezaSelec":
@@ -144,7 +148,7 @@ public class Strings {
                         return "Caballo";
                     case "eligePieza":
                         return "Elige una pieza:";
-                    case "cierreJuego":
+                    case "cerrarJuego":
                         return "Cerrar el Juego";
                     case "confirmacionCierre":
                         return "¿Estás seguro de que quieres salir?";
